@@ -1,9 +1,12 @@
+include <roundedCube.scad>
+
+split=true;
+
 $fa = 1;
 $fs = 0.4;
 
 button_spacing = 19;
-padding=1;
-pcb_edge=padding / 2;
+padding=0.5;
 pcb=[226.5,73.3,10.5];
 inside=[pcb[0]+padding, pcb[1]+padding, 1.4];
 
@@ -12,8 +15,13 @@ module button() {
 	cube([14, 14, 4]);
 }
 
-module spacebar() {
-	cube([33, 14, 4]);
+module button_2u() {
+	union() {
+		translate([(33 - 14) / 2, 0, 0]) button();
+		translate([1, 0.5, 0]) roundedCube([7, 13, 4]);
+		translate([33 - 7 - 1, 0.5, 0]) roundedCube([7, 13, 4]);
+//		cube([33, 14, 4]);	
+	}
 }
 
 module buttons(rows, cols) {
@@ -28,7 +36,7 @@ module grid() {
 	buttons(3, 12);
 	translate([0, button_spacing*3, 0]) buttons(1, 5);
 	translate([button_spacing * 7, button_spacing*3, 0]) buttons(1, 5);
-	translate([button_spacing * 5, button_spacing*3, -2]) spacebar();
+	translate([button_spacing * 5, button_spacing*3, -2]) button_2u();
 	translate([button_spacing * 7, button_spacing*3, 0]) buttons(1, 5);
 }
 
@@ -36,12 +44,37 @@ module screw_mount(x, y , z) {
 	translate([x, y, z]) cylinder(4, 1.6, 1.6);
 }
 
-difference() {
-	cube(inside);
-	translate([2.25, 1.65, 0]) grid();
-//	translate([-10, -10, -4]) cube(143, 100, 10);
-	screw_mount(pcb_edge + 18.6, pcb_edge + 17.3, -1);
-	screw_mount(pcb_edge + 18.6, inside[1] - pcb_edge - 18.3, -1);
-	screw_mount(inside[0] - pcb_edge - 17.6, pcb_edge + 17.3, -1);
-	screw_mount(inside[0] - pcb_edge - 17.6, inside[1] - pcb_edge - 18.3, -1);
+module the_plate() {
+	difference() {
+		roundedCube(inside, 0.4);
+		translate([2, 1.4, 0]) grid();
+		screw_mount(2 + 16.5, 1.4 + 16.5, -1);
+		screw_mount(2 + 16.5, 1.4 + 16.5 + 2 * 19, -1);
+		screw_mount(2 + 16.5 + 10 * 19, 1.4 + 16.5, -1);
+		screw_mount(2 + 16.5 + 10 * 19, 1.4 + 16.5 + 2 * 19, -1);
+		screw_mount(2 + 16.5 + 5 * 19, 1.4 + 16.5 + 19, -1);
+	}
 }
+
+module splitter() {
+	translate([-1, -1, -1]) union() {
+		cube([inside[0] / 2 - 18, inside[1] + 2, inside[2] + 2]);	
+		translate([inside[0] / 2 - 18, 19, 0])cube([38, 38, inside[2] + 2]);
+	}
+}
+
+module splitted_plate() {
+	translate([-inside[0] / 2 + 20, 0, 0]) difference() {
+		the_plate();
+		splitter();
+	}
+	translate([0, inside[1] + 10, 0]) intersection() {
+		the_plate();
+		splitter();
+	}
+}
+
+if(split)
+	splitted_plate();
+else
+	the_plate();

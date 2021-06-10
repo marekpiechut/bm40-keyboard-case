@@ -1,5 +1,7 @@
 include <roundedCube.scad>
 
+split=false;
+
 $fa = 1;
 $fs = 0.4;
 
@@ -142,4 +144,7 @@ module splitted_case() {
 	}
 }
 
-splitted_case();
+if(split)
+	splitted_case();
+else
+	the_case();
