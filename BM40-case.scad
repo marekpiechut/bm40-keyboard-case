@@ -1,6 +1,6 @@
 include <roundedCube.scad>
 
-split=false;
+split=true;
 
 $fa = 1;
 $fs = 0.4;
@@ -13,7 +13,7 @@ inside=[pcb[0]+padding, pcb[1]+padding, pcb[2]+padding + 10];
 outside=[inside[0]+thickness*2, inside[1]+thickness*2, pcb[2]+2];
 usb_depth=10;
 pcb_depth=8.4;
-hex_diameter=29;
+hex_diameter=30;
 
 module screw_mount(x, y , z) {
 	translate([x, y, z])
@@ -32,7 +32,7 @@ module leg_hole(x, y) {
 
 module usb_connector(x) {
 	translate([x, 1, 2]) cube([13, 9, 2]);
-	translate([x, -1, 2]) roundedCube([13, thickness + 2, 5.5], 1, false, true, true);
+	translate([x, -1, 2]) roundedCube([13, thickness + 2, 6], 1, false, true, true);
 }
 
 module reset_button(x, y) {
@@ -48,9 +48,8 @@ module extender_leg_hole(x, y) {
 
 module logo() {
 	linear_extrude(height = 1, center = true)
-	mirror([1, 0, 0])
 	rotate([180, 0, 0])
-	resize([10, 12.5, 0])
+	resize([12, 15, 0])
 	import("dayone-logo.svg", center = true);
 }
 
@@ -69,7 +68,7 @@ module box() {
 		roundedCube(outside, 2);
 		translate([thickness, thickness, 3]) cube(inside);
 		usb_connector(outside[0] - pcb_edge - 42.8);
-		reset_button(175.5, 47);
+		reset_button(172.5, 47);
 		extender_leg_hole(outside[0]-26, 12);
 		extender_leg_hole(26, 12);
 		translate([20, outside[1] / 2, 0]) led_holes();
@@ -102,7 +101,7 @@ module screw_mounts() {
 	screw_mount(pcb_edge + 18.6, outside[1] - pcb_edge - 18.3, 3);
 	screw_mount(outside[0] - pcb_edge - 17.6, pcb_edge + 17.3, 3);
 	screw_mount(outside[0] - pcb_edge - 17.6, outside[1] - pcb_edge - 18.3, 3);
-	screw_mount(pcb_edge + 113.8, pcb_edge + 31.3, 3);
+	screw_mount(pcb_edge + 113.8, pcb_edge + 36.6, 3);
 }
 
 module leg_holes() {
@@ -119,7 +118,7 @@ module the_case() {
 			screw_mounts();
 		}
 		leg_holes();
-		translate([outside[0] / 2, 20, 0]) logo();
+		translate([outside[0] / 2, 22, 0]) logo();
 	}
 }
 
