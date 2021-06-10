@@ -123,10 +123,16 @@ module the_case() {
 
 
 module splitter() {
-	translate([-1, -1, -1]) cube([outside[0] / 2 - 9, outside[1] + 2, outside[2] + 2]);
+	union() {
+		difference() {
+			translate([-1, -1, -1]) cube([outside[0] / 2 - 9, outside[1] + 2, outside[2] + 2]);
+			translate([outside[0] / 2 - 20, 10, -1 ]) cube([10, 17, outside[2] + 2]);
+		}
+		translate([outside[0] / 2 - 10, 39, -1 ]) cube([10, 17, outside[2] + 2]);
+	}
 }
 module splitted_case() {
-	translate([-outside[0] / 2 + 10, 0, 0]) difference() {
+	translate([-outside[0] / 2 + 20, 0, 0]) difference() {
 		the_case();
 		splitter();
 	}
@@ -136,5 +142,4 @@ module splitted_case() {
 	}
 }
 
-the_case();
-
+splitted_case();
