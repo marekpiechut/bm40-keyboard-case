@@ -1,6 +1,6 @@
 include <roundedCube.scad>
 
-split=true;
+split=false;
 
 $fa = 1;
 $fs = 0.4;
@@ -68,7 +68,7 @@ module box() {
 		roundedCube(outside, 2);
 		translate([thickness, thickness, 3]) cube(inside);
 		usb_connector(outside[0] - pcb_edge - 42.8);
-		reset_button(172.5, 47);
+		reset_button(172, 47);
 		extender_leg_hole(outside[0]-26, 12);
 		extender_leg_hole(26, 12);
 		translate([20, outside[1] / 2, 0]) led_holes();
@@ -97,11 +97,11 @@ module led_holes() {
 }
 
 module screw_mounts() {
-	screw_mount(pcb_edge + 18.6, pcb_edge + 17.3, 3);
-	screw_mount(pcb_edge + 18.6, outside[1] - pcb_edge - 18.3, 3);
-	screw_mount(outside[0] - pcb_edge - 17.6, pcb_edge + 17.3, 3);
-	screw_mount(outside[0] - pcb_edge - 17.6, outside[1] - pcb_edge - 18.3, 3);
-	screw_mount(pcb_edge + 113.8, pcb_edge + 36.6, 3);
+	screw_mount(pcb_edge + 18.6, pcb_edge + 17.1, 3);
+	screw_mount(pcb_edge + 18.6, outside[1] - pcb_edge - 18.5, 3);
+	screw_mount(outside[0] - pcb_edge - 17.6, pcb_edge + 17.1, 3);
+	screw_mount(outside[0] - pcb_edge - 17.6, outside[1] - pcb_edge - 18.5, 3);
+	screw_mount(pcb_edge + 113.8, pcb_edge + 36.4, 3);
 }
 
 module leg_holes() {
@@ -129,7 +129,7 @@ module splitter() {
 			translate([-1, -1, -1]) cube([outside[0] / 2 - 9, outside[1] + 2, outside[2] + 2]);
 			translate([outside[0] / 2 - 20, 10, -1 ]) cube([10, 17, outside[2] + 2]);
 		}
-		translate([outside[0] / 2 - 10, 39, -1 ]) cube([10, 17, outside[2] + 2]);
+		translate([outside[0] / 2 - 10, 53, -1 ]) cube([10, 17, outside[2] + 2]);
 	}
 }
 module splitted_case() {
