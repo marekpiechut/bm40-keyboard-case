@@ -27,7 +27,7 @@ module screw_mount(x, y , z) {
 }
 
 module leg_hole(x, y) {
-	translate([x, y, -1]) cylinder(2, 4.3, 4.3);
+	translate([x, y, -1]) cylinder(2, 4.5, 4.5);
 }
 
 module usb_connector(x) {
