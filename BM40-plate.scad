@@ -8,18 +8,24 @@ $fs = 0.4;
 button_spacing = 19;
 padding=0.5;
 pcb=[226.5,73.3,10.5];
-inside=[pcb[0]+padding, pcb[1]+padding, 1.4];
+inside=[pcb[0]+padding, pcb[1], 3];
 
 
 module button() {
-	cube([14, 14, 4]);
+	union() {
+		cube([14.2, 14.2, 10]);
+		translate([-1, 1, 0]) cube([2, 3.2, 10]);
+		translate([-1, 10, 0]) cube([2, 3.2, 10]);
+		translate([13.2, 1, 0]) cube([2, 3.2, 10]);
+		translate([13.2, 10, 0]) cube([2, 3.2, 10]);
+	}
 }
 
 module button_2u() {
 	union() {
 		translate([(33 - 14) / 2, 0, 0]) button();
-		translate([1, 0.5, 0]) roundedCube([7, 13, 4]);
-		translate([33 - 7 - 1, 0.5, 0]) roundedCube([7, 13, 4]);
+		translate([1, 0.5, 0]) roundedCube([7, 13, 10]);
+		translate([33 - 7 - 1, 0.5, 0]) roundedCube([7, 13, 10]);
 //		cube([33, 14, 4]);	
 	}
 }
@@ -41,13 +47,13 @@ module grid() {
 }
 
 module screw_mount(x, y , z) {
-	translate([x, y, z]) cylinder(4, 1.6, 1.6);
+	translate([x, y, z]) cylinder(10, 1.6, 1.6);
 }
 
 module the_plate() {
 	difference() {
 		roundedCube(inside, 0.4);
-		translate([2, 1.4, 0]) grid();
+		translate([2, 1, 0]) grid();
 		screw_mount(2 + 16.5, 1.4 + 16.5, -1);
 		screw_mount(2 + 16.5, 1.4 + 16.5 + 2 * 19, -1);
 		screw_mount(2 + 16.5 + 10 * 19, 1.4 + 16.5, -1);
