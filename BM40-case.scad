@@ -68,7 +68,7 @@ module box() {
 		roundedCube(outside, 2);
 		translate([thickness, thickness, 3]) cube(inside);
 		usb_connector(outside[0] - pcb_edge - 42.8);
-		reset_button(172.5, 47);
+		reset_button(172, 47);
 		extender_leg_hole(outside[0]-26, 12);
 		extender_leg_hole(26, 12);
 		translate([20, outside[1] / 2, 0]) led_holes();
