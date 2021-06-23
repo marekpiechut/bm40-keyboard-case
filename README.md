@@ -17,6 +17,6 @@ It has quite a few features though:
 
 ## How to get it
 
-Just running a first print, so it's not tested yet. Just give me few more days to finish it up :)
-If everything is OK I'll upload stl files for split and unsplit versions.
+Get STL files here:
 
+[https://www.thingiverse.com/thing:4892596](https://www.thingiverse.com/thing:4892596)

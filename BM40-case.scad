@@ -129,7 +129,7 @@ module splitter() {
 			translate([-1, -1, -1]) cube([outside[0] / 2 - 9, outside[1] + 2, outside[2] + 2]);
 			translate([outside[0] / 2 - 20, 10, -1 ]) cube([10, 17, outside[2] + 2]);
 		}
-		translate([outside[0] / 2 - 10, 39, -1 ]) cube([10, 17, outside[2] + 2]);
+		translate([outside[0] / 2 - 10, 52, -1 ]) cube([10, 17, outside[2] + 2]);
 	}
 }
 module splitted_case() {

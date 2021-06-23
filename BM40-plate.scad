@@ -1,6 +1,6 @@
 include <roundedCube.scad>
 
-split=true;
+split=false;
 
 $fa = 1;
 $fs = 0.4;
