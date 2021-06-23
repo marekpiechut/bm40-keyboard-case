@@ -13,7 +13,7 @@ inside=[pcb[0]+padding, pcb[1], 3];
 
 module button() {
 	union() {
-		cube([14.2, 14.2, 10]);
+		cube([14.1, 14.1, 10]);
 		translate([-1, 1, 0]) cube([2, 3.2, 10]);
 		translate([-1, 10, 0]) cube([2, 3.2, 10]);
 		translate([13.2, 1, 0]) cube([2, 3.2, 10]);
@@ -47,18 +47,18 @@ module grid() {
 }
 
 module screw_mount(x, y , z) {
-	translate([x, y, z]) cylinder(10, 1.6, 1.6);
+	translate([x, y, z]) cylinder(10, 1.9, 1.9);
 }
 
 module the_plate() {
 	difference() {
 		roundedCube(inside, 0.4);
-		translate([2, 1, 0]) grid();
-		screw_mount(2 + 16.5, 1.4 + 16.5, -1);
-		screw_mount(2 + 16.5, 1.4 + 16.5 + 2 * 19, -1);
-		screw_mount(2 + 16.5 + 10 * 19, 1.4 + 16.5, -1);
-		screw_mount(2 + 16.5 + 10 * 19, 1.4 + 16.5 + 2 * 19, -1);
-		screw_mount(2 + 16.5 + 5 * 19, 1.4 + 16.5 + 19, -1);
+		translate([2, 1.2, 0]) grid();
+		screw_mount(2 + 16.5, 1.4 + 16, -1);
+		screw_mount(2 + 16.5, 1.4 + 16 + 2 * 19, -1);
+		screw_mount(2 + 16.5 + 10 * 19, 1.4 + 16, -1);
+		screw_mount(2 + 16.5 + 10 * 19, 1.4 + 16 + 2 * 19, -1);
+		screw_mount(2 + 16.5 + 5 * 19, 1.4 + 16 + 19, -1);
 	}
 }
 
